@@ -9,6 +9,9 @@ public interface TramiteService {
 
 
 
-    public List<Tramite> listarTodo();
+    public List<Tramite> listarTramites();
+    public List<Tramite> listarTramitesActivos();
+    public List<Tramite> listarTramitesNotaria(String id);
+    public List<Tramite> listarTramitesNotariaFechas(String id, Date fecha);
 
 }
