@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pesnot.estado.msa</groupId>
-	<artifactId>liquidacion</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>m04-parest-api-liquidacion</artifactId>
+	<version>0.0.1</version>
 	<packaging>war</packaging>
 	<name>liquidacion</name>
 	<description>Demo project for Spring Boot</description>

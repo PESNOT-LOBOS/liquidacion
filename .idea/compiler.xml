@@ -2,16 +2,18 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="m04-admpes-api-actosnotariales" />
-        <module name="liquidacion" />
+        <module name="m04-parest-api-liquidacion" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="BACK_PARAMETROS" target="17" />
+      <module name="liquidacion" target="17" />
       <module name="m04-admpes-api-localizacion" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -21,6 +23,7 @@
       <module name="liquidacion" options="-parameters" />
       <module name="m04-admpes-api-actosnotariales" options="-parameters" />
       <module name="m04-admpes-api-localizacion" options="-parameters" />
+      <module name="m04-parest-api-liquidacion" options="-parameters" />
     </option>
   </component>
 </project>
