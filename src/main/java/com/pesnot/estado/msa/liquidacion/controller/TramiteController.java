@@ -34,6 +34,10 @@ public class TramiteController {
     public List<Tramite> listarTramitesNotaria(@PathVariable String notaria) {
         return this.tramiteService.listarTramitesNotaria(notaria);
     }
+    @PostMapping(value = "notaria", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Tramite> listarTramitesNotariaP(@RequestParam(required = false) String notaria) {
+        return this.tramiteService.listarTramitesNotaria(notaria);
+    }
 
     @GetMapping(value = "id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<Tramite> listarTramiteId(@PathVariable String idEntrante) {

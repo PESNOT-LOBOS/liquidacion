@@ -1,11 +1,6 @@
 package com.pesnot.estado.msa.liquidacion.service;
 
 import com.pesnot.estado.msa.liquidacion.domain.ActoTramite;
-import com.pesnot.estado.msa.liquidacion.domain.Tramite;
-import com.pesnot.estado.msa.liquidacion.repository.ActoTramiteRepository;
-import com.pesnot.estado.msa.liquidacion.repository.TramiteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.Optional;
 
