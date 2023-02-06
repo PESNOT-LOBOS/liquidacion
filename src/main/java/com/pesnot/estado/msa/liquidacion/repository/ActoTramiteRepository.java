@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface ActoTramiteRepository extends JpaRepository<ActoTramite,Long> {
     @Query(nativeQuery = true,value="SELECT * FROM ActoTramite WHERE estadoActivo='true'")
     public List<ActoTramite> listarActosTramiteActivos();
-    @Query(nativeQuery = true,value="SELECT * FROM ActoTramite a WHERE a.idTramite= :idTaramite")
+    @Query(nativeQuery = true,value="SELECT * FROM ActoTramite a WHERE a.idTramite= :idTramite")
     public List<ActoTramite> listarActosIdTramites(@Param("idTramite") String idTramite);
     @Query(nativeQuery = true,value="SELECT * FROM ActoTramite a WHERE a.idCatalogoActoNotarial= :idActo")
     public List<ActoTramite> listarActosActoTramites(@Param("idActo") String idActo);
