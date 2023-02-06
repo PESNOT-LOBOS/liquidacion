@@ -5,46 +5,44 @@ import com.pesnot.estado.msa.liquidacion.repository.ActoTramiteRepository;
 import com.pesnot.estado.msa.liquidacion.service.ActoTramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ActoTramiteServiceImpl implements ActoTramiteService {
     @Autowired
     private final ActoTramiteRepository actoTramiteRepository;
 
-    public ActoTramiteServiceImpl(ActoTramiteRepository actoTramiteRepositoryE) {
-        this.actoTramiteRepository = actoTramiteRepositoryE;
+    public ActoTramiteServiceImpl(ActoTramiteRepository actoTramiteRepository) {
+        this.actoTramiteRepository = actoTramiteRepository;
     }
-    
+
     @Override
     public List<ActoTramite> listarActoTramites() {
-        return null;
+        return actoTramiteRepository.findAll();
     }
 
     @Override
     public List<ActoTramite> listarActoTramitesActivos() {
-        return null;
+        return actoTramiteRepository.listarActosTramiteActivos();
     }
 
     @Override
     public List<ActoTramite> listarActosIdTramite(String idTramite) {
-        return null;
+        return actoTramiteRepository.listarActosIdTramites(idTramite);
     }
 
     @Override
     public List<ActoTramite> listarIdActosTramite(String idActos) {
-        return null;
+        return actoTramiteRepository.listarActosActoTramites(idActos);
     }
 
     @Override
     public Optional<ActoTramite> buscarId(String id) {
-        return Optional.empty();
+        return actoTramiteRepository.findById(Long.parseLong(id));
     }
 
     @Override
     public ActoTramite guardarActoTramite(ActoTramite tramiteEntrante) {
-        return null;
+        return actoTramiteRepository.save(tramiteEntrante);
     }
 }
