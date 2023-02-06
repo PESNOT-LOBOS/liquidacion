@@ -11,12 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface TramiteRepository extends JpaRepository<Tramite,Long> {
     @Query(nativeQuery = true,value="SELECT * FROM Tramite WHERE estadoActivoTramite='true'")
     public List<Tramite> listarTramitesActivos();
-    @Query(nativeQuery = true,value="SELECT * FROM Tramite")
-    public List<Tramite> listarTramites();
 
     @Query(nativeQuery = true,value="SELECT * FROM Tramite WHERE idNotaria=:id")
     public List<Tramite> listarTramitesNotaria(@Param("id") String id);
-
-    @Query(nativeQuery = true, value="SELECT * FROM Tramite WHERE idNotaria=:id AND fechaTramite=:fecha")
-    public List<Tramite> listarTramitesNotariaFechas(@Param("id") String id, @Param("fecha") Date fecha);
 }

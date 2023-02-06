@@ -1,13 +1,17 @@
 package com.pesnot.estado.msa.liquidacion.service.Impl;
+
 import com.pesnot.estado.msa.liquidacion.domain.Tramite;
 import com.pesnot.estado.msa.liquidacion.repository.TramiteRepository;
 import com.pesnot.estado.msa.liquidacion.service.TramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-public class TramiteServiceImpl implements TramiteService{
+@Service
+public class TramiteServiceImpl implements TramiteService {
     @Autowired
     private final TramiteRepository tramiteRepository;
 
@@ -17,7 +21,7 @@ public class TramiteServiceImpl implements TramiteService{
 
     @Override
     public List<Tramite> listarTramites() {
-        return tramiteRepository.listarTramites();
+        return tramiteRepository.findAll();
     }
 
     @Override
@@ -31,7 +35,13 @@ public class TramiteServiceImpl implements TramiteService{
     }
 
     @Override
-    public List<Tramite> listarTramitesNotariaFechas(String id, Date fecha) {
-        return tramiteRepository.listarTramitesNotariaFechas(id, fecha);
+    public Optional<Tramite> buscarId(String id) {
+        return tramiteRepository.findById(Long.parseLong(id));  //
     }
+
+    @Override
+    public Tramite guardarTramite(Tramite tramiteEntrante) {
+        return tramiteRepository.save(tramiteEntrante);
+    }
+
 }

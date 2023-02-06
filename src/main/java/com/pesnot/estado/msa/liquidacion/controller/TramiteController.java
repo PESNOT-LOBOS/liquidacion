@@ -5,16 +5,17 @@ import com.pesnot.estado.msa.liquidacion.service.TramiteService;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/tramites/")
+@RequestMapping("/v1/tramites")
 public class TramiteController {
 
     private final TramiteService tramiteService;
@@ -23,17 +24,26 @@ public class TramiteController {
     public List<Tramite> listarTramites() {
         return this.tramiteService.listarTramites();
     }
+
     @GetMapping(value = "activos", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Tramite> listarTramitesActivos() {
         return this.tramiteService.listarTramitesActivos();
     }
-    @GetMapping(value = "activos/{notaria}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tramite> listarTramitesNotarias(@PathVariable String notaria) {
+
+    @GetMapping(value = "notaria/{notaria}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Tramite> listarTramitesNotaria(@PathVariable String notaria) {
         return this.tramiteService.listarTramitesNotaria(notaria);
     }
-    @GetMapping(value = "activos/{notaria}/{fecha}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tramite> listarTramitesNotariasFechas(@PathVariable String notaria,@PathVariable Date fecha) {
-        return this.tramiteService.listarTramitesNotariaFechas(notaria,fecha);
+
+    @GetMapping(value = "id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Tramite> listarTramiteId(@PathVariable String idEntrante) {
+        return this.tramiteService.buscarId(idEntrante);
     }
+
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Tramite guardarTramites(@RequestParam(required = false) Tramite tramiteEntrante) {
+        return this.tramiteService.guardarTramite(tramiteEntrante);
+    }
+
 
 }
