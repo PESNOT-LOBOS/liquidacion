@@ -1,10 +1,12 @@
 package com.pesnot.estado.msa.liquidacion.service.Impl;
 
 import com.pesnot.estado.msa.liquidacion.domain.ActoTramite;
+import com.pesnot.estado.msa.liquidacion.domain.Tramite;
 import com.pesnot.estado.msa.liquidacion.repository.ActoTramiteRepository;
 import com.pesnot.estado.msa.liquidacion.service.ActoTramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 @Service
@@ -39,6 +41,32 @@ public class ActoTramiteServiceImpl implements ActoTramiteService {
     @Override
     public List<ActoTramite> listarActoTramitePorId(String idActos) {
         return null;
+    }
+
+    @Override
+    public List<Tramite> calcularParticipacionEstado(int idDesde, double valorCalculo, List<Tramite> listaCalcularParticipacion) {
+
+        for (int id = idDesde; id < listaCalcularParticipacion.size(); id++) {
+            Tramite tramiteActual = listaCalcularParticipacion.get(id);
+            List<ActoTramite> actosAsociados = actoTramiteRepository.listarActosIdTramites(tramiteActual.getId().toString());
+            System.out.println("Actos asociados " + actosAsociados);
+            double particpacionEstado=0.000;
+            if (id == idDesde) {
+                for (int fin = actosAsociados.size() - 1; fin > 0; fin--) {
+                    if(valorCalculo==0){
+                        break;
+                    }
+                    if (actosAsociados.get(fin).getValorActoTramiteActoTramite() > valorCalculo) {
+                        particpacionEstado = valorCalculo * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite();
+                        valorCalculo=0;
+                    } else if (actosAsociados.get(fin).getValorActoTramiteActoTramite() < valorCalculo) {
+                        particpacionEstado=actosAsociados.get(fin).getValorActoTramiteActoTramite()* actosAsociados.get(fin).getValorParticipacionEstadoActoTramite();
+                        valorCalculo=actosAsociados.get(fin).getValorActoTramiteActoTramite()-valorCalculo;
+                    }
+                }
+            }
+        }
+        return listaCalcularParticipacion;
     }
 
     @Override

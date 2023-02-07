@@ -13,6 +13,7 @@ public interface TramiteService {
     public List<Tramite> listarTramitesNotariaFecha(String id, Date mes);
     public List<Tramite> listarTramitesNotariaFechaMes(String id, int mes);
     public Double calcularLiquidacionSinIVAParticipacionEstadoNotariaFechaMes(String id, int mes);
+    public String calcularParticipacionEstadoParticipacionEstadoNotariaFechaMes(String id, int mes);
     public Optional<Tramite> buscarId(String id);
     public Tramite guardarTramite(Tramite tramiteEntrante);
 

@@ -57,6 +57,10 @@ public class TramiteController {
     public Tramite guardarTramites(@RequestParam(required = false) Tramite tramiteEntrante) {
         return this.tramiteService.guardarTramite(tramiteEntrante);
     }
+    @PostMapping(value = "calcularParticipacionEstado", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String participacionEstadoNuevo(@RequestParam(required = false) String tramite, int mes) {
+        return this.tramiteService.calcularParticipacionEstadoParticipacionEstadoNotariaFechaMes(tramite, mes);
+    }
     @GetMapping(value = "notaria/{notaria}/mes/{mes}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Double listarTramitesNotaria(@PathVariable String notaria, @PathVariable int mes) {
         return this.tramiteService.calcularLiquidacionSinIVAParticipacionEstadoNotariaFechaMes(notaria, mes);
