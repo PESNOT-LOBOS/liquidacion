@@ -5,6 +5,7 @@ import com.pesnot.estado.msa.liquidacion.repository.TramiteRepository;
 import com.pesnot.estado.msa.liquidacion.service.TramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 @Service
@@ -29,6 +30,44 @@ public class TramiteServiceImpl implements TramiteService {
     @Override
     public List<Tramite> listarTramitesNotaria(String id) {
         return tramiteRepository.listarTramitesNotaria(id);
+    }
+
+    @Override
+    public List<Tramite> listarTramitesNotariaFecha(String id, Date fecha) {
+        List<Tramite> listaEntrante = this.listarTramitesNotaria(id);
+        List<Tramite> listaSaliente = new ArrayList<Tramite>();
+
+        for (Tramite iteador : listaEntrante) {
+            Date fecha2 = new Date(iteador.getFechaTramite().getTime());
+            if (fecha2.equals(fecha)) {
+                listaSaliente.add(iteador);
+            }
+        }
+        return listaSaliente;
+    }
+
+    @Override
+    public List<Tramite> listarTramitesNotariaFechaMes(String id, int mes) {
+        List<Tramite> listaEntrante = this.listarTramitesNotaria(id);
+        List<Tramite> listaSaliente = new ArrayList<Tramite>();
+        for (Tramite iteador : listaEntrante) {
+            Date date = iteador.getFechaTramite();
+            if (date.getMonth() + 1 == mes) {
+                listaSaliente.add(iteador);
+            }
+        }
+        return listaSaliente;
+
+    }
+
+    @Override
+    public Double calcularLiquidacionSinIVAParticipacionEstadoNotariaFechaMes(String id, int mes) {
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
+        Double valorTotalRecaudado=0.000;
+        for(Tramite iteador : listaEntrante) {
+            valorTotalRecaudado+=iteador.getValorTotalTramite();
+        }
+        return valorTotalRecaudado;
     }
 
     @Override

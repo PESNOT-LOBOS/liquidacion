@@ -37,6 +37,11 @@ public class ActoTramiteServiceImpl implements ActoTramiteService {
     }
 
     @Override
+    public List<ActoTramite> listarActoTramitePorId(String idActos) {
+        return null;
+    }
+
+    @Override
     public Optional<ActoTramite> buscarId(String id) {
         return actoTramiteRepository.findById(Long.parseLong(id));
     }

@@ -4,6 +4,7 @@ import com.pesnot.estado.msa.liquidacion.domain.Tramite;
 import com.pesnot.estado.msa.liquidacion.service.TramiteService;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,14 @@ public class TramiteController {
     @PostMapping(value = "notaria", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Tramite> listarTramitesNotariaP(@RequestParam(required = false) String notaria) {
         return this.tramiteService.listarTramitesNotaria(notaria);
+    }
+    @PostMapping(value = "notaria/fecha", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Tramite> listarTramitesNotariaP(@RequestParam(required = false) String notaria, @DateTimeFormat(pattern = "dd-M-yyyy") Date fecha) {
+        return this.tramiteService.listarTramitesNotariaFecha(notaria, fecha);
+    }
+    @PostMapping(value = "notaria/fecha/mes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Tramite> listarTramitesNotariaMes(@RequestParam(required = false) String notaria, @RequestParam(required = false) int mes) {
+        return this.tramiteService.listarTramitesNotariaFechaMes(notaria,mes);
     }
 
     @GetMapping(value = "id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

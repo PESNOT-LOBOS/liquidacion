@@ -10,6 +10,7 @@ public interface ActoTramiteService {
     public List<ActoTramite> listarActoTramitesActivos();
     public List<ActoTramite> listarActosIdTramite(String idTramite);
     public List<ActoTramite> listarIdActosTramite(String idActos);
+    public List<ActoTramite> listarActoTramitePorId(String idActos);
     public Optional<ActoTramite> buscarId(String id);
     public ActoTramite guardarActoTramite(ActoTramite tramiteEntrante);
 }
