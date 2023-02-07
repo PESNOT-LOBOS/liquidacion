@@ -47,6 +47,10 @@ public class TramiteController {
     public List<Tramite> listarTramitesNotariaMes(@RequestParam(required = false) String notaria, @RequestParam(required = false) int mes) {
         return this.tramiteService.listarTramitesNotariaFechaMes(notaria,mes);
     }
+    @GetMapping(value = "notaria/{notaria}/mes/{mes}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Double listarTramitesNotaria(@PathVariable String notaria, @PathVariable int mes) {
+        return this.tramiteService.calcularLiquidacionSinIVAParticipacionEstadoNotariaFechaMes(notaria, mes);
+    }
 
     @GetMapping(value = "id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<Tramite> listarTramiteId(@PathVariable String idEntrante) {
