@@ -8,9 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.util.*;
 
 @Slf4j
@@ -58,8 +55,8 @@ public class TramiteController {
         return this.tramiteService.guardarTramite(tramiteEntrante);
     }
     @PostMapping(value = "calcularParticipacionEstado", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String participacionEstadoNuevo(@RequestParam(required = false) String tramite, int mes) {
-        return this.tramiteService.calcularParticipacionEstadoParticipacionEstadoNotariaFechaMes(tramite, mes);
+    public String participacionEstadoNuevo(@RequestParam(required = false) String notaria, int mes) {
+        return this.tramiteService.calcularParticipacionEstadoParticipacionEstadoNotariaFechaMes(notaria, mes);
     }
     @GetMapping(value = "notaria/{notaria}/mes/{mes}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Double listarTramitesNotaria(@PathVariable String notaria, @PathVariable int mes) {

@@ -35,8 +35,8 @@ public class ActoTramite {
     @Column(name = "fechaFinActoTramite")
     Date fechaFinActoTramite;
 
-    @Column(name = "numeroIntervenientesActoTramite")
-    int numeroIntervenientesActoTramite;
+    @Column(name = "numeroIntervinientesActoTramite")
+    int numeroIntervinientesActoTramite;
 
     @Column(name = "observacionActoTramite")
     String observacionActoTramite;
@@ -47,11 +47,11 @@ public class ActoTramite {
     @Column(name="alicuotaViviendaActoTramite")
     Double alicuotaViviendaActoTramite;
 
-    @Column(name="aplicaFueraDespachoTramite")
-    boolean aplicaFueraDespachoTramite;
+    @Column(name="aplicaFueraDespachoActoTramite")
+    Boolean aplicaFueraDespachoActoTramite;
 
     @Column(name="avaluoMunicipalActoTramite")
-    boolean avaluoMunicipalActoTramite;
+    Boolean avaluoMunicipalActoTramite;
 
     @Column(name="cuantiaActoTramite")
     Double cuantiaActoTramite;
@@ -63,7 +63,7 @@ public class ActoTramite {
     int numeroHorasActoTramite;
 
     @Column(name="pagadoActoTramite")
-    boolean pagadoActoTramite;
+    Boolean pagadoActoTramite;
 
     @Column(name="valorActoTramiteActoTramite")
     Double valorActoTramiteActoTramite;
@@ -78,5 +78,5 @@ public class ActoTramite {
     Double valorParticipacionNotarioActoTramite;
 
     @Column(name="estadoActivo")
-    boolean estadoActivo;
+    Boolean estadoActivo;
 }
