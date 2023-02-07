@@ -35,12 +35,12 @@ public class ActoTramiteServiceImpl implements ActoTramiteService {
 
     @Override
     public List<ActoTramite> listarIdActosTramite(String idActos) {
-        return actoTramiteRepository.listarActosActoTramites(idActos);
+        return actoTramiteRepository.listarIdActoTramites(idActos);
     }
 
     @Override
-    public List<ActoTramite> listarActoTramitePorId(String idActos) {
-        return null;
+    public List<ActoTramite> listarActoTramitePorId(String idTramite) {
+        return actoTramiteRepository.listarActosIdTramites(idTramite);
     }
 
     @Override

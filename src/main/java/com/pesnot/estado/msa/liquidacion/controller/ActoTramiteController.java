@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/v1/actoTramites")
 public class ActoTramiteController {
 
-    ActoTramiteService actoTramiteService;
+    private final ActoTramiteService actoTramiteService;
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ActoTramite> listarActosTramites() {
