@@ -37,7 +37,7 @@ public class TramiteServiceImpl implements TramiteService {
     }
 
     @Override
-    public List<Tramite> listarTramitesNotariaFecha(String id, Date fecha) {
+    public List<Tramite> listarTramitesNotariaFechaExacta(String id, Date fecha) {
         List<Tramite> listaEntrante = this.listarTramitesNotaria(id);
         List<Tramite> listaSaliente = new ArrayList<Tramite>();
 
@@ -66,7 +66,20 @@ public class TramiteServiceImpl implements TramiteService {
     }
 
     @Override
-    public Double calcularLiquidacionSinIVAParticipacionEstadoNotariaFechaMes(String id, int mes) {
+    public List<Tramite> listarTramitesNotariaFechaMesAño(String id, int mes, int año) {
+        List<Tramite> listaEntrante = this.listarTramitesNotaria(id);
+        List<Tramite> listaSaliente = new ArrayList<Tramite>();
+        for (Tramite iteador : listaEntrante) {
+            Date date = iteador.getFechaTramite();
+            if (date.getMonth() + 1 == mes && date.getYear()+1900== año) {
+                listaSaliente.add(iteador);
+            }
+        }
+        return listaSaliente;
+    }
+
+    @Override
+    public Double calcularValorSinIvaNotariaFechaMes(String id, int mes, int año) {
         List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
         Double valorTotalRecaudado = 0.000;
         for (Tramite iteador : listaEntrante) {
@@ -76,11 +89,42 @@ public class TramiteServiceImpl implements TramiteService {
     }
 
     @Override
-    public String calcularParticipacionEstadoParticipacionEstadoNotariaFechaMes(String id, int mes) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id, mes);
-        Double valorTotalRecaudado = 0.000;
+    public Double calcularParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año) {
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
+        Double participacionEstado = 0.000;
+        for (Tramite iteador : listaEntrante) {
+            participacionEstado += iteador.getValorParticipacionEstadoTramite();
+        }
+        return participacionEstado;
+    }
+
+    @Override
+    public Double calcularOtrosValoresNotariaFechaMes(String id, int mes, int año) {
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
         Double otrosValores = 0.000;
-        Double valoresNotasCredito = 0.000;
+        Double subtotalRecaudado=0.000;
+        Double totalRecaudado=0.000;
+        for (Tramite iteador : listaEntrante) {
+            totalRecaudado=iteador.getValorTotalTramite();
+            subtotalRecaudado= iteador.getValorSubtotalTramite();
+            otrosValores=otrosValores+(totalRecaudado-subtotalRecaudado);
+        }
+        return otrosValores;
+    }
+
+    @Override
+    public Double calcularValorDepositarNotariaFechaMesAño(Double participacionEstado, Double multas, Double intereses, Double notasCredito, Double pagoExceso) {
+        Double valorDepositar=participacionEstado-notasCredito-pagoExceso+multas+intereses;
+        return valorDepositar;
+    }
+
+
+    @Override
+    public String calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año) {
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes,año);
+        Double valorTotalRecaudado = 0.000;
+        Double otrosValores = 35.400;
+        Double valoresNotasCredito = 333.490;
         Double valorCalculoParticipacion = 0.000;
         //TODO parametro del sistema, configurar
         Double remuneracionServidorJudidicialCat5 = 5011.000;
@@ -105,8 +149,12 @@ public class TramiteServiceImpl implements TramiteService {
                 break;
             }
         }
+        System.out.println("valorTotalRecaudado " +valorTotalRecaudado);
+        System.out.println("otrosValores" + otrosValores);
+        System.out.println("valorNotasCredito" + valoresNotasCredito);
+        System.out.println("REMUNERACION" + remuneracionServidorJudidicialCat5);
         valorCalculoParticipacion = remuneracionServidorJudidicialCat5 - (valorTotalRecaudado - valoresNotasCredito - otrosValores);
-        System.out.println(valorCalculoParticipacion+"valooooooor participacion");
+        System.out.println(valorCalculoParticipacion+" valooooooor participacion");
         for (int idN = posicion; idN < listaEntrante.size(); idN++) {
             Tramite tramiteActual = listaEntrante.get(idN);
             System.out.println(tramiteActual);
@@ -121,11 +169,15 @@ public class TramiteServiceImpl implements TramiteService {
                 System.out.println("valor acto trámite " + valorActoTramite);
 
                 if (valorActoTramite > valorCalculoParticipacion) {
-                    particpacionEstado = valorCalculoParticipacion * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite();
+                    particpacionEstado = particpacionEstado+(valorCalculoParticipacion * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite());
+                    System.out.println("participación estado " + particpacionEstado);
                     valorCalculoParticipacion = 0.00;
                 } else if (valorActoTramite < valorCalculoParticipacion) {
                     particpacionEstado = particpacionEstado + (valorActoTramite * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite());
-                    valorCalculoParticipacion = valorActoTramite - valorCalculoParticipacion;
+                    System.out.println("participación estado " + particpacionEstado);
+                    valorCalculoParticipacion -= valorActoTramite;
+                    System.out.println("valorCalculoParticipacoin bucle" + valorCalculoParticipacion);
+                    continue;
                 }
             }
             tramiteActual.setValorParticipacionEstadoTramite(particpacionEstado);

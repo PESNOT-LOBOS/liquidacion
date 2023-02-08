@@ -9,12 +9,17 @@ public interface TramiteService {
 
     public List<Tramite> listarTramites();
     public List<Tramite> listarTramitesActivos();
-    public List<Tramite> listarTramitesNotaria(String id);
-    public List<Tramite> listarTramitesNotariaFecha(String id, Date mes);
-    public List<Tramite> listarTramitesNotariaFechaMes(String id, int mes);
-    public Double calcularLiquidacionSinIVAParticipacionEstadoNotariaFechaMes(String id, int mes);
-    public String calcularParticipacionEstadoParticipacionEstadoNotariaFechaMes(String id, int mes);
     public Optional<Tramite> buscarId(String id);
+    public List<Tramite> listarTramitesNotaria(String id);
+    public List<Tramite> listarTramitesNotariaFechaExacta(String id, Date mes);
+    public List<Tramite> listarTramitesNotariaFechaMes(String id, int mes);
+    public List<Tramite> listarTramitesNotariaFechaMesAño(String id, int mes,int año);
+    public String calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año);
+    public Double calcularValorSinIvaNotariaFechaMes(String id, int mes, int año);
+    public Double calcularParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año);
+    public Double calcularOtrosValoresNotariaFechaMes(String id, int mes, int año);
+    public Double calcularValorDepositarNotariaFechaMesAño( Double participacionEstado, Double multas, Double intereses, Double notasCredito, Double pagoExceso) ;
+
     public Tramite guardarTramite(Tramite tramiteEntrante);
 
 }
