@@ -151,22 +151,33 @@ public class TramiteServiceImpl implements TramiteService {
         }
 
         valorCalculoParticipacion = remuneracionServidorJudidicialCat5 - (valorTotalRecaudado - valoresNotasCredito - otrosValores);
-        System.out.println(" valooooooor participacion"+valorCalculoParticipacion );
-        System.out.println("tamaño"+listaEntrante.size() );
+        System.out.println(" valoor participacion ultimo"+valorCalculoParticipacion );
         for (int idN = posicion; idN < listaEntrante.size(); idN++) {
             Tramite tramiteActual = listaEntrante.get(idN);
             System.out.println(tramiteActual);
+            System.out.println(idN);
+            System.out.println(posicion);
+            if(idN!=posicion) {
+                valorCalculoParticipacion=tramiteActual.getValorTotalTramite();
+                System.out.println(tramiteActual.getValorTotalTramite());
+                System.out.println(" valor participacion"+valorCalculoParticipacion );
+            }
+            System.out.println(" valor participacion"+valorCalculoParticipacion );
             List<ActoTramite> actosAsociados = actoTramiteService.listarActoTramitePorId(tramiteActual.getId().toString());
             System.out.println("Actos asociados " + actosAsociados);
+            System.out.println(actosAsociados.size());
+
             double particpacionEstado = 0.000;
-            for (int fin = actosAsociados.size() - 1; fin > 0; fin--) {
+            for (int fin = actosAsociados.size() - 1; fin >= 0; fin--) {
+                System.out.println("entrando a arreglos");
                 if (valorCalculoParticipacion == 0) {
                     break;
                 }
                 Double valorActoTramite = actosAsociados.get(fin).getValorActoTramiteActoTramite();
                 System.out.println("valor acto trámite " + valorActoTramite);
 
-                if (valorActoTramite > valorCalculoParticipacion) {
+                if (valorActoTramite >= valorCalculoParticipacion) {
+
                     particpacionEstado = particpacionEstado + (valorCalculoParticipacion * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite());
                     System.out.println("participación estado " + particpacionEstado);
                     valorCalculoParticipacion = 0.00;
