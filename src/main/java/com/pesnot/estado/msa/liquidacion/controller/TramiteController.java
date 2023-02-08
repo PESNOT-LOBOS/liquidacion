@@ -28,6 +28,10 @@ public class TramiteController {
         return this.tramiteService.listarTramitesActivos();
     }
 
+    @GetMapping(value = "id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Tramite> listarTramiteId(@PathVariable String id) {
+        return this.tramiteService.buscarId(id);
+    }
     @GetMapping(value = "notaria/{notaria}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Tramite> listarTramitesNotaria(@PathVariable String notaria) {
         return this.tramiteService.listarTramitesNotaria(notaria);
@@ -48,23 +52,21 @@ public class TramiteController {
     public List<Tramite> listarTramitesNotariaMes(@RequestParam(required = false) String notaria, @RequestParam(required = false) int mes, @RequestParam(required = false) int año) {
         return this.tramiteService.listarTramitesNotariaFechaMesAño(notaria,mes,año);
     }
-
-    @GetMapping(value = "id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Tramite> listarTramiteId(@PathVariable String idEntrante) {
-        return this.tramiteService.buscarId(idEntrante);
-    }
-
-    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Tramite guardarTramites(@RequestParam(required = false) Tramite tramiteEntrante) {
-        return this.tramiteService.guardarTramite(tramiteEntrante);
-    }
     @PostMapping(value = "calcularParticipacionEstado", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String participacionEstadoPost(@RequestParam(required = false) String notaria, int mes, int año) {
+    public String participacionEstadoPost(@RequestParam(required = false) String notaria,@RequestParam(required = false) int mes, @RequestParam(required = false)int año) {
         return this.tramiteService.calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(notaria, mes,año);
+    }
+    @GetMapping(value = "calcularParticipacionEstado/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+        public String listarTramitesNotariaI(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
+        return this.tramiteService.calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(notaria, mes,anio);
     }
     @GetMapping(value = "notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Double listarTramitesNotaria(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularValorSinIvaNotariaFechaMes(notaria,mes,anio);
+    }
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Tramite guardarTramites(@RequestParam(required = false) Tramite tramiteEntrante) {
+        return this.tramiteService.guardarTramite(tramiteEntrante);
     }
 
 
