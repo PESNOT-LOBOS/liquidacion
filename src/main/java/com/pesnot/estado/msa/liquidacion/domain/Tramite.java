@@ -70,19 +70,19 @@ public class Tramite {
     String usuarioMatrizadorTramite;
 
     @Column(name = "valorSubtotalTramite")
-    double valorSubtotalTramite;
+    Double valorSubtotalTramite;
 
     @Column(name = "valorTotalTramite")
-    double valorTotalTramite;
+    Double valorTotalTramite;
 
     @Column(name = "valorParticipacionNotarioTramite")
-    double valorParticipacionNotarioTramite;
+    Double valorParticipacionNotarioTramite;
 
     @Column(name = "valorParticipacionEstadoTramite")
-    double valorParticipacionEstadoTramite;
+    Double valorParticipacionEstadoTramite;
 
     @Column(name = "estadoUAFTramite")
-    boolean estadoUAFTramite;
+    Boolean estadoUAFTramite;
 
     @Column(name = "numeroFojasTramite")
     int numeroFojasTramite;
@@ -100,7 +100,7 @@ public class Tramite {
     Long usuarioModificacionTramite;
 
     @Column(name = "estadoActivoTramite")
-    boolean estadoActivoTramite;
+    Boolean estadoActivoTramite;
 
     @Column(name = "idTramiteBpm")
     Long idTramiteBpm;

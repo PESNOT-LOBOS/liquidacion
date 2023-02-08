@@ -71,7 +71,7 @@ public class TramiteServiceImpl implements TramiteService {
         List<Tramite> listaSaliente = new ArrayList<Tramite>();
         for (Tramite iteador : listaEntrante) {
             Date date = iteador.getFechaTramite();
-            if (date.getMonth() + 1 == mes && date.getYear()+1900== año) {
+            if (date.getMonth() + 1 == mes && date.getYear() + 1900 == año) {
                 listaSaliente.add(iteador);
             }
         }
@@ -80,7 +80,7 @@ public class TramiteServiceImpl implements TramiteService {
 
     @Override
     public Double calcularValorSinIvaNotariaFechaMes(String id, int mes, int año) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes,año);
         Double valorTotalRecaudado = 0.000;
         for (Tramite iteador : listaEntrante) {
             valorTotalRecaudado += iteador.getValorTotalTramite();
@@ -90,7 +90,7 @@ public class TramiteServiceImpl implements TramiteService {
 
     @Override
     public Double calcularParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id,mes,año);
         Double participacionEstado = 0.000;
         for (Tramite iteador : listaEntrante) {
             participacionEstado += iteador.getValorParticipacionEstadoTramite();
@@ -100,28 +100,28 @@ public class TramiteServiceImpl implements TramiteService {
 
     @Override
     public Double calcularOtrosValoresNotariaFechaMes(String id, int mes, int año) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMes(id,mes);
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes, año);
         Double otrosValores = 0.000;
-        Double subtotalRecaudado=0.000;
-        Double totalRecaudado=0.000;
+        Double subtotalRecaudado = 0.000;
+        Double totalRecaudado = 0.000;
         for (Tramite iteador : listaEntrante) {
-            totalRecaudado=iteador.getValorTotalTramite();
-            subtotalRecaudado= iteador.getValorSubtotalTramite();
-            otrosValores=otrosValores+(totalRecaudado-subtotalRecaudado);
+            totalRecaudado = iteador.getValorTotalTramite();
+            subtotalRecaudado = iteador.getValorSubtotalTramite();
+            otrosValores = otrosValores + (totalRecaudado - subtotalRecaudado);
         }
         return otrosValores;
     }
 
     @Override
     public Double calcularValorDepositarNotariaFechaMesAño(Double participacionEstado, Double multas, Double intereses, Double notasCredito, Double pagoExceso) {
-        Double valorDepositar=participacionEstado-notasCredito-pagoExceso+multas+intereses;
+        Double valorDepositar = participacionEstado - notasCredito - pagoExceso + multas + intereses;
         return valorDepositar;
     }
 
 
     @Override
     public String calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes,año);
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes, año);
         Double valorTotalRecaudado = 0.000;
         Double otrosValores = 35.400;
         Double valoresNotasCredito = 333.490;
@@ -149,12 +149,10 @@ public class TramiteServiceImpl implements TramiteService {
                 break;
             }
         }
-        System.out.println("valorTotalRecaudado " +valorTotalRecaudado);
-        System.out.println("otrosValores" + otrosValores);
-        System.out.println("valorNotasCredito" + valoresNotasCredito);
-        System.out.println("REMUNERACION" + remuneracionServidorJudidicialCat5);
+
         valorCalculoParticipacion = remuneracionServidorJudidicialCat5 - (valorTotalRecaudado - valoresNotasCredito - otrosValores);
-        System.out.println(valorCalculoParticipacion+" valooooooor participacion");
+        System.out.println(" valooooooor participacion"+valorCalculoParticipacion );
+        System.out.println("tamaño"+listaEntrante.size() );
         for (int idN = posicion; idN < listaEntrante.size(); idN++) {
             Tramite tramiteActual = listaEntrante.get(idN);
             System.out.println(tramiteActual);
@@ -169,7 +167,7 @@ public class TramiteServiceImpl implements TramiteService {
                 System.out.println("valor acto trámite " + valorActoTramite);
 
                 if (valorActoTramite > valorCalculoParticipacion) {
-                    particpacionEstado = particpacionEstado+(valorCalculoParticipacion * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite());
+                    particpacionEstado = particpacionEstado + (valorCalculoParticipacion * actosAsociados.get(fin).getValorParticipacionEstadoActoTramite());
                     System.out.println("participación estado " + particpacionEstado);
                     valorCalculoParticipacion = 0.00;
                 } else if (valorActoTramite < valorCalculoParticipacion) {
