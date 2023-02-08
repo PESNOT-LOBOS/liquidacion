@@ -80,7 +80,7 @@ public class TramiteServiceImpl implements TramiteService {
 
     @Override
     public Double calcularValorSinIvaNotariaFechaMes(String id, int mes, int año) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes,año);
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes, año);
         Double valorTotalRecaudado = 0.000;
         for (Tramite iteador : listaEntrante) {
             valorTotalRecaudado += iteador.getValorTotalTramite();
@@ -90,7 +90,7 @@ public class TramiteServiceImpl implements TramiteService {
 
     @Override
     public Double calcularParticipacionEstadoTramitesNotariaFechaMesAño(String id, int mes, int año) {
-        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id,mes,año);
+        List<Tramite> listaEntrante = this.listarTramitesNotariaFechaMesAño(id, mes, año);
         Double participacionEstado = 0.000;
         for (Tramite iteador : listaEntrante) {
             participacionEstado += iteador.getValorParticipacionEstadoTramite();
@@ -151,18 +151,18 @@ public class TramiteServiceImpl implements TramiteService {
         }
 
         valorCalculoParticipacion = remuneracionServidorJudidicialCat5 - (valorTotalRecaudado - valoresNotasCredito - otrosValores);
-        System.out.println(" valoor participacion ultimo"+valorCalculoParticipacion );
+        System.out.println(" valoor participacion ultimo" + valorCalculoParticipacion);
         for (int idN = posicion; idN < listaEntrante.size(); idN++) {
             Tramite tramiteActual = listaEntrante.get(idN);
             System.out.println(tramiteActual);
             System.out.println(idN);
             System.out.println(posicion);
-            if(idN!=posicion) {
-                valorCalculoParticipacion=tramiteActual.getValorTotalTramite();
+            if (idN != posicion) {
+                valorCalculoParticipacion = tramiteActual.getValorTotalTramite();
                 System.out.println(tramiteActual.getValorTotalTramite());
-                System.out.println(" valor participacion"+valorCalculoParticipacion );
+                System.out.println(" valor participacion" + valorCalculoParticipacion);
             }
-            System.out.println(" valor participacion"+valorCalculoParticipacion );
+            System.out.println(" valor participacion" + valorCalculoParticipacion);
             List<ActoTramite> actosAsociados = actoTramiteService.listarActoTramitePorId(tramiteActual.getId().toString());
             System.out.println("Actos asociados " + actosAsociados);
             System.out.println(actosAsociados.size());

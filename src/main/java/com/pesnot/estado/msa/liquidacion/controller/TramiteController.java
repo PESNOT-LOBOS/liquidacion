@@ -60,9 +60,21 @@ public class TramiteController {
         public String listarTramitesNotariaI(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(notaria, mes,anio);
     }
-    @GetMapping(value = "notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Double listarTramitesNotaria(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
+    @GetMapping(value = "calculoSinIva/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Double CalcularValorSinIva(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularValorSinIvaNotariaFechaMes(notaria,mes,anio);
+    }
+    @GetMapping(value = "calculoParticipacionEstado/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Double CalcularParticipacionEstado(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
+        return this.tramiteService.calcularParticipacionEstadoTramitesNotariaFechaMesAño(notaria,mes,anio);
+    }
+    @GetMapping(value = "calculoOtrosValores/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Double CalcularOtrosValores(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
+        return this.tramiteService.calcularOtrosValoresNotariaFechaMes(notaria,mes,anio);
+    }
+    @PostMapping(value = "calculoOtrosValoresDepositar", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Double CalcularOtrosValores(@RequestParam(required = false) Double participacionEstado, @RequestParam(required = false) Double multas,@RequestParam(required = false) Double intereses,@RequestParam(required = false) Double notasCredito,@RequestParam(required = false) Double pagoExceso) {
+        return this.tramiteService.calcularValorDepositarNotariaFechaMesAño(participacionEstado,multas,intereses,notasCredito,pagoExceso);
     }
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public Tramite guardarTramites(@RequestParam(required = false) Tramite tramiteEntrante) {
