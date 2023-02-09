@@ -6,6 +6,7 @@ import com.pesnot.estado.msa.liquidacion.domain.ActoTramite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,4 +17,6 @@ public interface ActoTramiteRepository extends JpaRepository<ActoTramite,Long> {
     public List<ActoTramite> listarActosIdTramites(@Param("idTramite") String idTramite);
     @Query(nativeQuery = true,value="SELECT * FROM ActoTramite a WHERE a.idCatalogoActoNotarial= :idActo")
     public List<ActoTramite> listarIdActoTramites(@Param("idActo") String idActo);
+
+
 }

@@ -30,4 +30,8 @@ public class LiquidacionApplication  extends SpringBootServletInitializer {
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
 	}
+	@Bean
+	public RestTemplate getresttemplate() {
+		return new RestTemplate();
+	}
 }

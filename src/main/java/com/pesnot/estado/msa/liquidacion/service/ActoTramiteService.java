@@ -13,7 +13,9 @@ public interface ActoTramiteService {
     public List<ActoTramite> listarActosIdTramite(String idTramite);
     public List<ActoTramite> listarIdActosTramite(String idActos);
     public List<ActoTramite> listarActoTramitePorId(String idActos);
-    public List<Tramite> calcularParticipacionEstado(int idDesde, double valorCalculo, List<Tramite> lista);
+    public String calcularParticipacionEstadoDeValor();
     public Optional<ActoTramite> buscarId(String id);
     public ActoTramite guardarActoTramite(ActoTramite tramiteEntrante);
+
+    public Long getSBUParametro();
 }
