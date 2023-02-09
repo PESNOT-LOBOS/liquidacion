@@ -1,19 +1,10 @@
-package ec.gob.cj.pesnot.paginaprincipal.catalogoservicios.Modelo;
-
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+package com.pesnot.estado.msa.liquidacion.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="ParametroCatalogo")
@@ -50,8 +41,8 @@ public class Parametro {
 		
 	}
 	public Parametro(Long idParametro, Catalogo idCatalogo, Long numero, String descripcion, Date fecha,
-			Date fechaInicio, Date fechaFin, boolean estadoActivo, boolean estadoParametroCatalogo,
-			String nombreParametro, Long valorParametro) {
+                     Date fechaInicio, Date fechaFin, boolean estadoActivo, boolean estadoParametroCatalogo,
+                     String nombreParametro, Long valorParametro) {
 		super();
 		this.idParametro = idParametro;
 		this.idCatalogo = idCatalogo;
@@ -66,7 +57,7 @@ public class Parametro {
 		this.valorParametro = valorParametro;
 	}
 	public Parametro(Catalogo idCatalogo, Long numero, String descripcion, Date fecha, Date fechaInicio, Date fechaFin,
-			boolean estadoActivo, boolean estadoParametroCatalogo, String nombreParametro, Long valorParametro) {
+                     boolean estadoActivo, boolean estadoParametroCatalogo, String nombreParametro, Long valorParametro) {
 		super();
 		this.idCatalogo = idCatalogo;
 		this.numero = numero;
