@@ -14,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/actoTramites")
+@CrossOrigin(origins ="*", allowedHeaders ="*")
 public class ActoTramiteController {
 
     private final ActoTramiteService actoTramiteService;

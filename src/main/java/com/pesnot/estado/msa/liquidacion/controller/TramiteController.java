@@ -14,6 +14,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/tramites")
+@CrossOrigin(origins ="*", allowedHeaders ="*")
 public class TramiteController {
 
     private final TramiteService tramiteService;
@@ -56,19 +57,19 @@ public class TramiteController {
     public String participacionEstadoPost(@RequestParam(required = false) String notaria,@RequestParam(required = false) int mes, @RequestParam(required = false)int año) {
         return this.tramiteService.calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(notaria, mes,año);
     }
-    @GetMapping(value = "calcularParticipacionEstado/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "calcularParticipacionEstado/notaria/{notaria}/mes/{mes}/year/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
         public String listarTramitesNotariaI(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularTotalParticipacionEstadoTramitesNotariaFechaMesAño(notaria, mes,anio);
     }
-    @GetMapping(value = "calculoSinIva/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "calculoSinIva/notaria/{notaria}/mes/{mes}/year/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Double CalcularValorSinIva(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularValorSinIvaNotariaFechaMes(notaria,mes,anio);
     }
-    @GetMapping(value = "calculoParticipacionEstado/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "calculoParticipacionEstadoGeneral/notaria/{notaria}/mes/{mes}/year/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Double CalcularParticipacionEstado(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularParticipacionEstadoTramitesNotariaFechaMesAño(notaria,mes,anio);
     }
-    @GetMapping(value = "calculoOtrosValores/notaria/{notaria}/mes/{mes}/año/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "calculoOtrosValores/notaria/{notaria}/mes/{mes}/year/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Double CalcularOtrosValores(@PathVariable String notaria, @PathVariable int mes, @PathVariable int anio) {
         return this.tramiteService.calcularOtrosValoresNotariaFechaMes(notaria,mes,anio);
     }
